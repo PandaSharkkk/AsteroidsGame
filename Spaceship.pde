@@ -55,6 +55,14 @@ class Spaceship extends Floater
     rotate(-1*dRadians);
     translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }
+  
+  public float getX() {
+    return (float)myCenterX;
+  }
+
+  public float getY() {
+    return (float)myCenterY;
+  }
 
   public void show() {
     fill(175);
