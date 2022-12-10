@@ -48,9 +48,9 @@ public void draw()
       theGarvins.get(i).move();
       float d = dist(stan.getX(), stan.getY(), theGarvins.get(i).getX(), theGarvins.get(i).getY());
       if (d < 50) {
-        if(i == 0 && theGarvins.get(i).getType() == "BigAsteroid"){
-         gameActive = false; 
-         gameStart = false;
+        if (theGarvins.get(i).getType() == "BigAsteroid") {
+          gameActive = false;
+          gameStart = false;
         }
         theGarvins.remove(i);
         theGarvins.add(new Asteroid());
@@ -78,12 +78,12 @@ public void draw()
           //Score
           if (theGarvins.get(k).getHealth() > 0) {
             theGarvins.get(k).setHealth(theGarvins.get(k).getHealth() - 1);
-            if(k == 0){
-             score += 5; 
+            if (theGarvins.get(k).getType() == "BigAsteroid") {
+              score += 5;
             }
           } else {
-            if(k == 0 && theGarvins.get(k).getType() == "BigAsteroid"){
-             score += 5000;
+            if (theGarvins.get(k).getType() == "BigAsteroid") {
+              score += 5000;
             }
             score += 30;
             theGarvins.remove(k);
@@ -103,7 +103,7 @@ public void draw()
 
     fill(#15CE47);
     rect(width/2 - 250, 75, health, 50);
-    
+
     //Big Asteroid
     theGarvins.get(0).show();
     theGarvins.get(0).move();
@@ -139,10 +139,15 @@ public void draw()
 
     fill(255);
     textSize(60);
-    text("SpaceShip Survivor", 125, 250);
+    text("SpaceShip Survivor", 125, 200);
     textSize(30);
-    text("use wasd to move and space bar to shoot", 125, 350);
-    text("press space to start!", 250, 550);
+    text("use wasd to move and space bar to shoot", 125, 275);
+    textSize(20);
+    text("kill asteroids for points", 275, 375);
+    text("big asteroids give more points but one shots u", 175, 425);
+    text("press p to add big asteroids!", 260, 475);
+    textSize(30);
+    text("press space to start!", 250, 575);
   } else {
     for (int i = 0; i < nightSky.length; i++) {
       nightSky[i].show();
@@ -180,12 +185,21 @@ public void keyPressed()
     spaceIsPressed = true;
   }
 
+  if (key == 'p') {
+    theGarvins.add(new BigAsteroid());
+  }
   if (key == 'r') {
     gameActive = true;
     score = 0;
     health = 500;
     stan.reset();
-    theGarvins.set(0, new BigAsteroid());
+    for (int i = theGarvins.size() - 1; i >= 0; i--) {
+      theGarvins.remove(i);
+    }
+    theGarvins.add(new BigAsteroid());
+    for (int k = 0; k < 7; k++) {
+      theGarvins.add(new Asteroid());
+    }
   }
   if (key == 'h') {
     stan.hyperSpace();
@@ -202,7 +216,7 @@ public void keyReleased()
   } else if (key == 'd')
   {
     dIsPressed = false;
-  } else if (key == 's') 
+  } else if (key == 's')
   {
     sIsPressed = false;
   } else if (key == ' ')
