@@ -18,7 +18,7 @@ class Spaceship extends Floater
     corners3 = 3;
     xCorners3 = new float[] {2.15, 3.65, 2.15};
     yCorners3 = new float[] {0.85, 0, -0.85};
-    
+
     myCenterX = width/2;
     myCenterY = height/2;
     myXspeed = 0;
@@ -27,6 +27,14 @@ class Spaceship extends Floater
     myColor = 175;
     myColorFire = color(#FA4E1E);
     myO = (int)(Math.random()*155) + 100;
+  }
+
+  public void reset() {
+    myCenterX = width/2;
+    myCenterY = height/2;
+    myXspeed = 0;
+    myYspeed = 0;
+    myPointDirection = 0;
   }
 
   public void hyperSpace() {
@@ -51,17 +59,29 @@ class Spaceship extends Floater
     vertex(-1.65 * 15 + (float)myXspeed, 0.3 * 15 + (float)myYspeed);
     vertex(-1.65 * 15 + (float)myXspeed, -0.3 * 15 + (float)myYspeed);
     endShape(CLOSE);
-    
+
     rotate(-1*dRadians);
     translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }
-  
+
   public float getX() {
     return (float)myCenterX;
   }
 
   public float getY() {
     return (float)myCenterY;
+  }
+
+  public float getXspeed() {
+    return (float)myXspeed;
+  }
+
+  public float getYspeed() {
+    return (float)myYspeed;
+  }
+
+  public double getPoint() {
+    return (double)myPointDirection;
   }
 
   public void show() {
